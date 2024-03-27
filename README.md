@@ -52,9 +52,11 @@ This template supports analyses in Python, R, or a combination of the two.
 ├── paper
 ├── pipeline
 └── src
-    ├── Python
-    └── R
-├── traintest
+|   ├── Python
+|   └── R
+└── traintest
+    ├── test
+    └── train
 ```
 
 * `data/` - raw data only
@@ -70,7 +72,7 @@ This template supports analyses in Python, R, or a combination of the two.
 
 ```
 ├── DESCRIPTION
-├── requirements.txt
+└── requirements.txt
 ```
 
 These are conventional files used for recording package dependencies. 
@@ -94,8 +96,8 @@ These are conventional files used for recording package dependencies.
 |   ├── Python
 |   └── R
 └── traintest
-|   ├── test
-|   └── train
+    ├── test
+    └── train
 ```
 
 The pipeline folder structure supports modular organization of your code. This modular organization makes it easier to:
@@ -120,7 +122,7 @@ The last pipeline script should render all literate programming documents (see n
 
 ```
 ├── notebooks
-├── paper
+└── paper
 ```
 
 The literate programming documents in `notebooks/` explain the pipeline components. They should render relatively quickly, so keep long-running commands in the pipeline scripts. Keep rendering times short by using the processed data in `outputs/`.
