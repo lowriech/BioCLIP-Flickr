@@ -31,3 +31,88 @@ Then, back at the command line, run this command (replacing the username and rep
 Then push your local to the remote.
 
 > `git push -u origin main`
+
+## What's in the template
+
+The template is organized to accomplish the three goals of a research compendium.
+
+1. Folders and files organized according to conventions
+2. Modular organization of data, methods, and outputs
+3. Record of the computational environment
+
+This template supports analyses in Python, R, or a combination of the two.
+
+### Folder structure
+
+```
+├── data
+├── figs
+├── notebooks
+├── output
+├── paper
+├── pipeline
+└── src
+    ├── Python
+    └── R
+```
+
+* `data/` - raw data only
+* `figs/` - static figures generated during pipeline
+* `notebooks/` - literate programming files (e.g., Jupyter, Quarto) explaining the pipeline
+* `output/` - derived data generated during pipeline
+* `paper/` - the analysis manuscript (preferably in .md format)
+* `pipeline/` - pipeline scripts
+* `src/` - source files supporting the pipeline (e.g., functions, classes, constants)
+
+### Computational environment
+
+```
+├── DESCRIPTION
+├── requirements.txt
+```
+
+These are conventional files used for recording package dependencies. 
+
+`DESCRIPTION` is a file used by R packages to capture package metadata. It is useful for analyses because it records package dependencies following commonly used conventions. Add packages (with version numbers) to the `Imports` field. When other users clone your repo, they can install dependencies by calling `devtools::install_deps()` in R.
+
+`requirements.txt` is a file used to record Python package dependencies. Users can install dependencies by running `pip install -r requirements.txt` at the command line.
+
+### Pipeline components
+
+```
+├── data
+├── figs
+├── output
+├── pipeline
+│   ├── 00_download_data.R
+│   ├── 00_download_data.py
+│   ├── _run_pipeline.R
+│   └── _run_pipeline.py
+└── src
+    ├── Python
+    └── R
+```
+
+The pipeline folder structure supports modular organization of your code. This modular organization makes it easier to:
+
+* Distribute development among collaborators
+* Document pipeline functionality
+* Reuse or replace components over time
+
+Here's how the pipeline flows.
+
+1. `pipeline > _run_pipeline.R` or `pipeline > _run_pipeline.py` is a single script that runs the full pipeline.
+2. `_run_pipeline.*` calls pipeline scripts in order e.g., `00_download_data.R`, `01_preprocess_data.R`, `02_fit_model.R`, ..., `10_render_notebooks.R`.
+3. Pipeline scripts use functions, classes, and constant defined by the modules in `src/Python/` or scripts in `src/R/`.
+4. Pipeline scripts generate processed data in `output/` and static visualizations in `figs/`.
+
+### Use case interpretation
+
+```
+├── notebooks
+├── paper
+```
+
+The literate programming scripts in `notebooks/` explain the pipeline components. They should render relatively quickly, so keep long-running commands in the pipeline scripts. Use the processed data in `outputs/` in the notebooks.
+
+`paper/` contains a manuscript describing your use case. It should preferably be in Markdown or a literate programming script.
