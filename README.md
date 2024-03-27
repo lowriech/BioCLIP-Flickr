@@ -24,9 +24,9 @@ Make sure to replace `[your repo name]` with the repo name you've chosen for you
 
 Create a remote repository on GitHub with the same name.
 
-Then, back at the command line, run this command (replacing the username and repo name).
+Then, back at the command line, change the remote-url to match your new repository (replacing the username and repo name).
 
-`git remote add origin https://github.com/[your username]/[your repo name].git`
+`git remote set-url origin https://github.com/[your username]/[your repo name].git`
 
 Then push your local to the remote.
 
