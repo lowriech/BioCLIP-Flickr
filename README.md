@@ -16,7 +16,7 @@ To use this template, clone this repo and rename it.
 
 From the directory where you keep git repositories (e.g., ~/Documents/GitHub/), run this command.
 
-> `git clone https://github.com/FlukeAndFeather/ecoviztemplate.git [your repo name]` 
+`git clone https://github.com/FlukeAndFeather/ecoviztemplate.git [your repo name]` 
 
 Make sure to replace `[your repo name]` with the repo name you've chosen for your use case. Otherwise it'll be called "ecoviztemplate".
 
@@ -26,11 +26,11 @@ Create a remote repository on GitHub with the same name.
 
 Then, back at the command line, run this command (replacing the username and repo name).
 
-> `git remote add origin https://github.com/[your username]/[your repo name].git`
+`git remote add origin https://github.com/[your username]/[your repo name].git`
 
 Then push your local to the remote.
 
-> `git push -u origin main`
+`git push -u origin main`
 
 ## What's in the template
 
@@ -106,6 +106,10 @@ Here's how the pipeline flows.
 3. Pipeline scripts use functions, classes, and constant defined by the modules in `src/Python/` or scripts in `src/R/`.
 4. Pipeline scripts generate processed data in `output/` and static visualizations in `figs/`.
 
+`00_download_data.R` and `00_download_data.py` are provided as examples. Replace them and add additional pipeline scripts as appropriate.
+
+The last pipeline script should render all literate programming documents (see next section).
+
 ### Use case interpretation
 
 ```
@@ -113,6 +117,8 @@ Here's how the pipeline flows.
 ├── paper
 ```
 
-The literate programming scripts in `notebooks/` explain the pipeline components. They should render relatively quickly, so keep long-running commands in the pipeline scripts. Use the processed data in `outputs/` in the notebooks.
+The literate programming documents in `notebooks/` explain the pipeline components. They should render relatively quickly, so keep long-running commands in the pipeline scripts. Keep rendering times short by using the processed data in `outputs/`.
+
+Rendering the documents in `notebooks/` should be automated by the last pipeline script (e.g., `pipeline/10_render_notebooks.R`). For Jupyter notebooks, render them to HTML using `nbconvert`: `jupyter nbconvert --to html notebooks/your_notebook.ipynb`. For Quarto documents, use `quarto render notebooks/your_notebook.qmd --to html`.
 
 `paper/` contains a manuscript describing your use case. It should preferably be in Markdown or a literate programming script.
