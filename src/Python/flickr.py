@@ -1,6 +1,5 @@
 import requests, json, urllib
 
-
 BASE_URL = "https://www.flickr.com/services/rest/"
 API_KEY = "1c6bc9eda634d3b3d2cc63174d3e8ddb"
 BBOX = "-82.09,24.765,-79.181,27.092"
@@ -13,7 +12,6 @@ BASE_ARGS = {
     "extras": "url_o",
     "text": "wildlife"
 }
-
 
 def get_flickr(args):
     args["method"] = "flickr.photos.search"

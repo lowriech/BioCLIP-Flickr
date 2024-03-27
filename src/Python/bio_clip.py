@@ -12,12 +12,11 @@ min_prob = 1e-9
 
 model, preprocess_train, preprocess_val = open_clip.create_model_and_transforms('hf-hub:imageomics/bioclip')
 tokenizer = open_clip.get_tokenizer('hf-hub:imageomics/bioclip')
-txt_emb_npy = "txt_emb_species.npy"
-txt_names_json = "txt_emb_species.json"
+txt_emb_npy = "./data/txt_emb_species.npy"
+txt_names_json = "./data/txt_emb_species.json"
 txt_emb = torch.from_numpy(np.load(txt_emb_npy, mmap_mode="r"))
 with open(txt_names_json) as fd:
     txt_names = json.load(fd)
-print(txt_emb)
 
 preprocess_img = transforms.Compose(
     [
@@ -63,15 +62,5 @@ def classify_image(remote_image, what_animal):
         return {
             format_name(*txt_names[i]): prob for i, prob in zip(topk.indices, topk.values)
         }
-    # print(probs)
-
-    # # Sum up by the rank
-    # output = collections.defaultdict(float)
-    # for i in torch.nonzero(probs > min_prob).squeeze():
-    #     output[" ".join(txt_names[i][0][: rank + 1])] += probs[i]
-
-    # topk_names = heapq.nlargest(k, output, key=output.get)
-    # with open('./verifications.txt', 'w') as f:
-    #     f.write(topk_names)
             
 

@@ -1,0 +1,5 @@
+txt_emb_species.json
+txt_emb_species.npy
+data/
+output/
+__pycache__
