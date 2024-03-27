@@ -1,0 +1,11 @@
+Package: ecoviztemplate
+Title: One Line, Title Case
+Authors@R: 
+    person(given = "First", family = "Last",
+           email = "email@domain.com", role = c("aut", "cre"),
+           comment = c("ORCID-ID" = "ORCID"))
+Description: Describe the analysis.
+Imports: 
+    package (== version)
+URL: https://github.com/FlukeAndFeather/ecoviztemplate
+BugReports: https://github.com/FlukeAndFeather/ecoviztemplate/issues
