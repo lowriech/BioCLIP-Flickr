@@ -54,6 +54,7 @@ This template supports analyses in Python, R, or a combination of the two.
 └── src
     ├── Python
     └── R
+├── traintest
 ```
 
 * `data/` - raw data only
@@ -63,6 +64,7 @@ This template supports analyses in Python, R, or a combination of the two.
 * `paper/` - the analysis manuscript (preferably in .md format)
 * `pipeline/` - pipeline scripts
 * `src/` - source files supporting the pipeline (e.g., functions, classes, constants)
+* `traintest/` - specifies train/test splits for reproducibility
 
 ### Computational environment
 
@@ -105,6 +107,7 @@ Here's how the pipeline flows.
 2. `_run_pipeline.*` calls pipeline scripts in order e.g., `00_download_data.R`, `01_preprocess_data.R`, `02_fit_model.R`, ..., `10_render_notebooks.R`.
 3. Pipeline scripts use functions, classes, and constant defined by the modules in `src/Python/` or scripts in `src/R/`.
 4. Pipeline scripts generate processed data in `output/` and static visualizations in `figs/`.
+5. Train/test splits for AI models use the identifiers in `traintest/train/` and `traintest/test/`.
 
 `00_download_data.R` and `00_download_data.py` are provided as examples. Replace them and add additional pipeline scripts as appropriate.
 
@@ -122,3 +125,7 @@ The literate programming documents in `notebooks/` explain the pipeline componen
 Rendering the documents in `notebooks/` should be automated by the last pipeline script (e.g., `pipeline/10_render_notebooks.R`). For Jupyter notebooks, render them to HTML using `nbconvert`: `jupyter nbconvert --to html notebooks/your_notebook.ipynb`. For Quarto documents, use `quarto render notebooks/your_notebook.qmd --to html`.
 
 `paper/` contains a manuscript describing your use case. It should preferably be in Markdown or a literate programming script.
+
+## AI-specific considerations
+
+* Test/train splits need to be recorded for reproducibility in `output/model/train` and `output/model/test`. If you use multiple models, rename the model directory accordingly e.g. `output/model-cnn/train`, `output/model-cnn/test`, `output/model-svm/train`, `output/model-svm/test`.
