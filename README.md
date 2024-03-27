@@ -91,8 +91,11 @@ These are conventional files used for recording package dependencies.
 │   ├── _run_pipeline.R
 │   └── _run_pipeline.py
 └── src
-    ├── Python
-    └── R
+|   ├── Python
+|   └── R
+└── traintest
+|   ├── test
+|   └── train
 ```
 
 The pipeline folder structure supports modular organization of your code. This modular organization makes it easier to:
@@ -125,7 +128,3 @@ The literate programming documents in `notebooks/` explain the pipeline componen
 Rendering the documents in `notebooks/` should be automated by the last pipeline script (e.g., `pipeline/10_render_notebooks.R`). For Jupyter notebooks, render them to HTML using `nbconvert`: `jupyter nbconvert --to html notebooks/your_notebook.ipynb`. For Quarto documents, use `quarto render notebooks/your_notebook.qmd --to html`.
 
 `paper/` contains a manuscript describing your use case. It should preferably be in Markdown or a literate programming script.
-
-## AI-specific considerations
-
-* Test/train splits need to be recorded for reproducibility in `output/model/train` and `output/model/test`. If you use multiple models, rename the model directory accordingly e.g. `output/model-cnn/train`, `output/model-cnn/test`, `output/model-svm/train`, `output/model-svm/test`.
