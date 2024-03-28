@@ -7,7 +7,10 @@ import json
 from torchvision import transforms
 import torch.nn.functional as F
 import collections
+from collections import OrderedDict
 import heapq
+
+
 min_prob = 1e-9
 
 model, preprocess_train, preprocess_val = open_clip.create_model_and_transforms('hf-hub:imageomics/bioclip')
@@ -40,8 +43,7 @@ def format_name(taxon, common):
         return taxon
     return f"{taxon} ({common})"
 
-def classify_image(remote_image, what_animal):
-    presences = ["present", "not present"]
+def classify_image(remote_image):
     tmp_id = str(uuid.uuid4())
     f = f"/tmp/{tmp_id}.jpg"
     urllib.request.urlretrieve( 
@@ -59,8 +61,9 @@ def classify_image(remote_image, what_animal):
     if rank + 1 == len(ranks):
         topk = probs.topk(k)
         print(topk)
-        return {
-            format_name(*txt_names[i]): prob for i, prob in zip(topk.indices, topk.values)
-        }
+        return OrderedDict(
+            [format_name(*txt_names[i]), prob] for i, prob in zip(topk.indices, topk.values)
+        )
+        
             
 

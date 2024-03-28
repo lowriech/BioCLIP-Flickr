@@ -151,5 +151,6 @@ docker run -it \
     -v $PWD/src/Python:/app \
     -v $PWD/data:/app/data \
     -v $PWD/output:/app/output \
+    -v $PWD/notebooks:/app/notebooks \
     $IMAGE
 ```
