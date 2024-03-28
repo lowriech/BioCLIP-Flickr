@@ -1,35 +1,17 @@
 from flickr import BASE_ARGS, get_flickr
 from bio_clip import classify_image
-from eol import get_eol
 import json
-import csv
-import re
 
-
-THRESHOLD = 0.7
-
-
-def extract_text_in_parentheses(text):
-    pattern = r"\((.*?)\)"  # Regular expression pattern to match text within parentheses
-    matches = re.findall(pattern, text)
-    return matches
-
-def main():
-    imgs = get_flickr(BASE_ARGS)
-    with open('./output/verifications.csv', 'w') as f:
-        writer = csv.writer(f)
-        for i in [i for i in imgs['photos']['photo'] if 'url_o' in i.keys()][0:5]:
-            flickr_img = i['url_o']
-            x = classify_image(flickr_img)
-            vals = {k: float(v) for k, v in x.items() if float(v) != THRESHOLD}
-            if len(vals.keys()) > 0:
-                species, likelihood = next(iter(vals.items()))
-                common_name = extract_text_in_parentheses(species)
-                eol_link = get_eol(common_name)
-                writer.writerow([flickr_img, species, common_name, likelihood, eol_link])
-
-
-if __name__ == "__main__":
-    main()
-    
-
+imgs = get_flickr(BASE_ARGS)
+with open('./output/verifications.txt', 'w') as f:
+    for i in [i for i in imgs['photos']['photo'] if 'url_o' in i.keys()][0:5]:
+        x = classify_image(i['url_o'], 'flamingo')
+        vals = {k: float(v) for k, v in x.items()}
+        f.write(json.dumps(vals))
+        f.write(
+            '\n'
+        )
+        f.write(i['url_o'])
+        f.write(
+            '\n'
+        )
