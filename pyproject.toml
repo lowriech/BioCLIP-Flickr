@@ -1,0 +1,10 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ecoviz_clip" 
+dynamic = ["dependencies"]
+version = "1.0.0"
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
