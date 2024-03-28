@@ -7,6 +7,10 @@ def get_eol(text):
     args["q"] = text
     args["page"] = 1
     encoded_params = urllib.parse.urlencode(args)
+    print(f"{BASE_URL}?{encoded_params}")
     x = requests.get(f"{BASE_URL}?{encoded_params}")
-    return json.loads(x.content)
+    try:
+        return json.loads(x.content)
+    except json.decoder.JSONDecodeError:
+        return dict()
     

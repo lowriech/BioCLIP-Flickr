@@ -25,7 +25,12 @@ def main():
             if len(vals.keys()) > 0:
                 species, likelihood = next(iter(vals.items()))
                 common_name = extract_text_in_parentheses(species)
-                eol_link = get_eol(common_name)
+                eol_response = get_eol(common_name)
+                print(eol_response)
+                if 'results' in eol_response.keys() and len(eol_response['results']) > 0:
+                    eol_link = eol_response['results'][0]['link']
+                else:
+                    eol_link = "NONE"
                 writer.writerow([flickr_img, species, common_name, likelihood, eol_link])
 
 
