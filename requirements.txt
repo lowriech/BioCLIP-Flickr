@@ -1,1 +1,4 @@
 huggingface-hub == 0.22.1
+torch==2.2.2
+torchvision==0.17.2
+open_clip_torch==2.24.0

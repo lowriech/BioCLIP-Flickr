@@ -130,3 +130,26 @@ The literate programming documents in `notebooks/` explain the pipeline componen
 Rendering the documents in `notebooks/` should be automated by the last pipeline script (e.g., `pipeline/10_render_notebooks.R`). For Jupyter notebooks, render them to HTML using `nbconvert`: `jupyter nbconvert --to html notebooks/your_notebook.ipynb`. For Quarto documents, use `quarto render notebooks/your_notebook.qmd --to html`.
 
 `paper/` contains a manuscript describing your use case. It should preferably be in Markdown or a literate programming script.
+
+### Building and running the code
+You can replicate the environment using the included Dockerfile:
+
+To build:
+```
+IMAGE=bioclip-flickr
+docker build -t $IMAGE .
+```
+
+To run as-is:
+```
+docker run -it $IMAGE
+```
+
+To run while changing the data or the src code directory:
+```
+docker run -it \
+    -v $PWD/src/Python:/app \
+    -v $PWD/data:/app/data \
+    -v $PWD/output:/app/output \
+    $IMAGE
+```
