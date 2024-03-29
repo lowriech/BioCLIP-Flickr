@@ -1,6 +1,6 @@
 FROM continuumio/miniconda3
 RUN conda install --yes -c conda-forge python=3.11
-COPY ./src/Python /app
+COPY ./src/ecoviz_bioclip /app
 COPY ./data /app/data
 COPY ./output /app/output
 COPY ./requirements.txt /app/requirements.txt
