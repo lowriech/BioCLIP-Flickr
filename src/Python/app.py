@@ -26,7 +26,6 @@ def main():
                 species, likelihood = next(iter(vals.items()))
                 common_name = extract_text_in_parentheses(species)
                 eol_response = get_eol(common_name)
-                print(eol_response)
                 if 'results' in eol_response.keys() and len(eol_response['results']) > 0:
                     eol_link = eol_response['results'][0]['link']
                 else:
