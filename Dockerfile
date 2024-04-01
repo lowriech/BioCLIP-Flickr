@@ -7,7 +7,9 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 # RUN conda install --yes -c pytorch pytorch torchvision cudatoolkit=11.0 
 RUN apt update && apt install -y gcc
-RUN pip3 install -r requirements.txt
+# installing our package ecoviz_bioclip (requirements.txt installed as dependencies)
+RUN pip3 install .
+# RUN pip3 install -r requirements.txt
 
 
 
