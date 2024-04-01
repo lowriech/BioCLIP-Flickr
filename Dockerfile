@@ -10,7 +10,7 @@ RUN apt update && apt install -y gcc
 # installing our package ecoviz_bioclip (requirements.txt installed as dependencies)
 RUN pip3 install .
 # RUN pip3 install -r requirements.txt
-
+RUN python3 -m pipeline/01-download-data.py
 
 
 ENTRYPOINT ["python3"]
