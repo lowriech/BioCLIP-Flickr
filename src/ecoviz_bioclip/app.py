@@ -1,6 +1,6 @@
-from flickr import BASE_ARGS, get_flickr
-from bio_clip import classify_image
-from eol import get_eol
+from ecoviz_bioclip.flickr import BASE_ARGS, get_flickr
+from ecoviz_bioclip.bio_clip import classify_image
+from ecoviz_bioclip.eol import get_eol
 import json
 import csv
 import re
